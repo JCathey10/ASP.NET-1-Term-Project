@@ -1,0 +1,15 @@
+﻿@model User
+@{
+    Layout = "_Layout";
+    // Sending the Title back to the Layout
+    ViewBag.Title = "Profile Page";
+}
+
+<div class="text-center">
+    <h1>User Profiles</h1>
+    <div id="wrapper">
+        <div class="text-left" id="name"><h3><b>Name:</b> @Model.Name</h3></div>
+        <div class="text-left" id="favoriteTeam"><h3><b>Favorite Team:</b> @Model.FavoriteTeam</h3></div>
+        <div class="text-left" id="about"><h3><b>About:</b> @Model.About</h3></div>
+    </div>
+</div>

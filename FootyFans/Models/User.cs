@@ -13,5 +13,6 @@ namespace FootyFans.Models
 		public int UserId { get; set; }
 		public string Name { get; set; }
 		public string FavoriteTeam { get; set; }
+		public string About { get; set; }
 	}
 }

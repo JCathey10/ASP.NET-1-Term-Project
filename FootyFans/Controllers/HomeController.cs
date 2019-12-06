@@ -18,7 +18,8 @@ namespace FootyFans.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			List<User> users = repo.Users;
+			return View(users);
 		}
 
 		public IActionResult About()
@@ -41,6 +42,29 @@ namespace FootyFans.Controllers
 		public IActionResult AddComment(string description)
 		{
 			return View("AddComment", HttpUtility.HtmlDecode(description));
+		}
+
+		public IActionResult CreateProfile()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult CreateProfile(User userProfile)
+		{
+			// Get the list of current profiles from the repo
+			List<User> profiles = repo.Users;
+
+			// Add the new profile to the list
+			profiles.Add(userProfile);
+
+			return View("Index", profiles);
+		}
+
+		public IActionResult ProfilePage(string name)
+		{
+			User user = repo.GetUserByName(name);
+			return View(user);
 		}
 
 		[HttpPost]

@@ -10,22 +10,24 @@
 
     @foreach (Video v in Model)
     {
-        <div class="text-center">
-            <div id="video">
-                <h3><b>@v.Description</b></h3>
-                <video width="500" controls>
-                    <source src="@v.VideoUrl" type="video/mp4" />
-                </video><br />
-                <a asp-action="AddComment" asp-route-description="@v.Description"><b>Add a comment</b></a>
-                <br />
-                @if (v.Comments.Count > 0)
-                {
-                    @foreach (Comment c in v.Comments)
+        <div id="wrapper">
+            <div class="text-center">
+                <div id="video">
+                    <h3><b>@v.Description</b></h3>
+                    <video width="500" controls>
+                        <source src="@v.VideoUrl" type="video/mp4" />
+                    </video><br />
+                    @if (v.Comments.Count > 0)
                     {
-                        <label><b>Comment: </b>@c.CommentText</label><br />
+                        @foreach (Comment c in v.Comments)
+                        {
+                            <label><b>Comment: </b>@c.CommentText</label><br />
+                        }
                     }
-                }
-            </div>
-        </div><br />    
+                    <a asp-action="AddComment" asp-route-description="@v.Description"><b>Add a comment</b></a>
+                    <br />
+                </div>
+            </div> 
+        </div><br />
     }
 </div>
