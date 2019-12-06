@@ -1,0 +1,74 @@
+﻿@{
+    // Using ViewData to send the Title back to _Layout
+    ViewBag.Title= "Footage";
+    Layout = "_Layout";
+}
+
+<div class="text-center">
+
+    <div class="text-center">
+        <div id="video">
+            <h4>2019 Skills</h4>
+            <video width="500" controls>
+                <source src="~/videos/Skills2019.mp4" type="video/mp4" />
+            </video><br />
+            <label><b>Comments: will go here...</b></label>
+            @*@if (m.Comments.Count > 0)
+            {
+                <label><b>Comments:</b></label>
+                @foreach (Comment c in m.Comments)
+                {
+                    <label>@c.CommentText</label><br />
+                }
+            }*@
+        </div>
+
+        <div id="video">
+            <h4>Ronaldinho Skills</h4>
+            <video width="500" controls>
+                <source src="~/videos/RonaldinhoSkills.mp4" type="video/mp4" />
+            </video><br />
+            <label><b>Comments: will go here...</b></label>
+            @*@if (m.Comments.Count > 0)
+            {
+                <label><b>Comments:</b></label>
+                @foreach (Comment c in m.Comments)
+                {
+                    <label>@c.CommentText</label><br />
+                }
+            }*@
+        </div>
+
+        <div id="video">
+            <h4>Leo Messi Skills</h4>
+            <video width="500" controls>
+                <source src="~/videos/MessiSkills.mp4" type="video/mp4" />
+            </video><br />
+            <label><b>Comments: will go here...</b></label>
+            @*@if (m.Comments.Count > 0)
+            {
+                <label><b>Comments:</b></label>
+                @foreach (Comment c in m.Comments)
+                {
+                    <label>@c.CommentText</label><br />
+                }
+            }*@
+        </div>
+
+        <div id="video">
+            <h4>Ronaldo Skills</h4>
+            <video width="500" controls>
+                <source src="~/videos/RonaldoSkills.mp4" type="video/mp4" />
+            </video><br />
+            <label><b>Comments: will go here...</b></label>
+            @*@if (m.Comments.Count > 0)
+            {
+                <label><b>Comments:</b></label>
+                @foreach (Comment c in m.Comments)
+                {
+                    <label>@c.CommentText</label><br />
+                }
+            }*@
+        </div>
+    </div>
+</div>

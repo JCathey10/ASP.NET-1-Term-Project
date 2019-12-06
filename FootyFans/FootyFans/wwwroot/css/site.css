@@ -1,0 +1,22 @@
+﻿header {
+    background-color: green;
+}
+
+body{
+    /*background-image: url('../images/backgroundImage.jpg');
+    background-repeat: repeat;
+    background-color: green;*/  
+}
+
+#logo {
+    font-family: "Comic Sans MS", Verdana, Helvetica, Arial, sans-serif;
+    color: #000000;
+    line-height: 120px;
+    font-weight: bold;
+    font-size: 42pt;
+    /*background-image: url('../images/backgroundimage.jpg');*/
+    /*background-repeat: no-repeat;*/
+    text-align: center;
+}
+
+
