@@ -1,74 +1,31 @@
-﻿@{
+﻿@model List<Video>
+@{
     // Using ViewData to send the Title back to _Layout
     ViewBag.Title= "Footage";
     Layout = "_Layout";
 }
 
 <div class="text-center">
+    <h1>Some of our Favorite Videos</h1><br />
 
-    <div class="text-center">
-        <div id="video">
-            <h4>2019 Skills</h4>
-            <video width="500" controls>
-                <source src="~/videos/Skills2019.mp4" type="video/mp4" />
-            </video><br />
-            <label><b>Comments: will go here...</b></label>
-            @*@if (m.Comments.Count > 0)
-            {
-                <label><b>Comments:</b></label>
-                @foreach (Comment c in m.Comments)
+    @foreach (Video v in Model)
+    {
+        <div class="text-center">
+            <div id="video">
+                <h3><b>@v.Description</b></h3>
+                <video width="500" controls>
+                    <source src="@v.VideoUrl" type="video/mp4" />
+                </video><br />
+                <a asp-action="AddComment" asp-route-description="@v.Description"><b>Add a comment</b></a>
+                <br />
+                @if (v.Comments.Count > 0)
                 {
-                    <label>@c.CommentText</label><br />
+                    @foreach (Comment c in v.Comments)
+                    {
+                        <label><b>Comment: </b>@c.CommentText</label><br />
+                    }
                 }
-            }*@
-        </div>
-
-        <div id="video">
-            <h4>Ronaldinho Skills</h4>
-            <video width="500" controls>
-                <source src="~/videos/RonaldinhoSkills.mp4" type="video/mp4" />
-            </video><br />
-            <label><b>Comments: will go here...</b></label>
-            @*@if (m.Comments.Count > 0)
-            {
-                <label><b>Comments:</b></label>
-                @foreach (Comment c in m.Comments)
-                {
-                    <label>@c.CommentText</label><br />
-                }
-            }*@
-        </div>
-
-        <div id="video">
-            <h4>Leo Messi Skills</h4>
-            <video width="500" controls>
-                <source src="~/videos/MessiSkills.mp4" type="video/mp4" />
-            </video><br />
-            <label><b>Comments: will go here...</b></label>
-            @*@if (m.Comments.Count > 0)
-            {
-                <label><b>Comments:</b></label>
-                @foreach (Comment c in m.Comments)
-                {
-                    <label>@c.CommentText</label><br />
-                }
-            }*@
-        </div>
-
-        <div id="video">
-            <h4>Ronaldo Skills</h4>
-            <video width="500" controls>
-                <source src="~/videos/RonaldoSkills.mp4" type="video/mp4" />
-            </video><br />
-            <label><b>Comments: will go here...</b></label>
-            @*@if (m.Comments.Count > 0)
-            {
-                <label><b>Comments:</b></label>
-                @foreach (Comment c in m.Comments)
-                {
-                    <label>@c.CommentText</label><br />
-                }
-            }*@
-        </div>
-    </div>
+            </div>
+        </div><br />    
+    }
 </div>

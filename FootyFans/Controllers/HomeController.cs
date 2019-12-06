@@ -2,8 +2,6 @@
 using System.Web;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FootyFans.Models;
 using FootyFans.Repositories;
@@ -12,6 +10,12 @@ namespace FootyFans.Controllers
 {
 	public class HomeController : Controller
 	{
+		IRepository repo;
+		public HomeController(IRepository r)
+		{
+			repo = r;
+		}
+
 		public IActionResult Index()
 		{
 			return View();
@@ -24,12 +28,31 @@ namespace FootyFans.Controllers
 
 		public IActionResult Footage()
 		{
-			return View();
+			List<Video> videos = repo.Videos;
+
+			return View(videos);
 		}
 
 		public IActionResult News()
 		{
 			return View();
+		}
+
+		public IActionResult AddComment(string description)
+		{
+			return View("AddComment", HttpUtility.HtmlDecode(description));
+		}
+
+		[HttpPost]
+		public RedirectToActionResult AddComment(string description, string commentText, string user)
+		{
+			Video video = repo.GetVideoByDescription(description);
+			video.Comments.Add(new Comment()
+			{
+				UserName = new User() { Name = user },
+				CommentText = commentText
+			});
+			return RedirectToAction("Footage");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,26 @@
+﻿@model String
+@{
+    Layout = "_Layout";
+    // Sending the Title back to the Layout
+    ViewBag.Title = "Comment";
+}
+<div class="text-center">
+    <h1>Comment for <em> @Model</em></h1>
+</div>
+<div id="wrapper">
+    <div class="panel panel-success">
+        <div class="panel-body">
+            <form class="p-a-1" method="post">
+                <div class="form-group">
+                    <label for="user">Your Name:</label>
+                    <input class="form-control" name="user" placeholder="Enter your name here" /><br />
+                    <label for="commentText">Your Comment:</label>
+                    <input class="form-control" name="commentText" placeholder="Write your comment here." /><br />
+                    <button class="btn btn-primary" type="submit" value="Enter"> 
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
