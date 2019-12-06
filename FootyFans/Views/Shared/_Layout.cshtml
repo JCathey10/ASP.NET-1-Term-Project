@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>*@
+    <title>@ViewBag.Title - Footy Fans</title>
+</head>
+<header>
+    <div id="logo">Footy&nbsp;Fans</div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">FootyFans</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+                <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+                <li><a asp-controller="Home" asp-action="About">About</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    @RenderBody()
+</body>
+</html>
