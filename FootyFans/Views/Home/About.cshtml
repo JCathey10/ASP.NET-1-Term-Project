@@ -4,7 +4,26 @@
     Layout = "_Layout";
 }
 
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Footy Fans</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+            <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+            <li><a asp-controller="Home" asp-action="CreateProfile">Create a Profile</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="text-center">
-
+    <h1 style="color:green">About Footy Fans</h1>
+    <h3>
+        Hello fellow soccer fans! Our site is dedicated to soccer fans like you!
+        Feel free to create a profile and join our community.
+    </h3><br />
+    <a class="btn btn-success" asp-controller="Home" asp-action="CreateProfile">Create a Profile!</a>
 
 </div>

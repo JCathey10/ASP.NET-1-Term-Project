@@ -5,8 +5,23 @@
     ViewBag.Title = "Create a Profile";
 }
 
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Footy Fans</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+            <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+            <li><a asp-controller="Home" asp-action="CreateProfile">Create a Profile</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="panel-heading text-center">
-    <h1>Create a Profile!</h1><br />
+    <h1 style="color:green">Create a Profile!</h1><br />
 </div>
 <div id="wrapper">
     <div class="panel panel-success">
@@ -15,11 +30,11 @@
                 <div asp-validation-summary="All">
                     <div class="form-group">
                         <label asp-for="Name">User Name:</label>
-                        <input class="form-control" asp-for="Name" />
+                        <input class="form-control" asp-for="Name" placeholder="Leo Messi" />
                     </div>
                     <div class="form-group">
                         <label asp-for="FavoriteTeam">Who's Your Favorite Team?</label>
-                        <input class="form-control" asp-for="FavoriteTeam" />
+                        <input class="form-control" asp-for="FavoriteTeam" placeholder="FC Barcelona" />
                     </div>
                     <div class="form-group">
                         <label asp-for="About">Tell us About Yourself:</label>
@@ -28,6 +43,9 @@
                         </textarea><br />
                         <button class="btn btn-primary" type="submit">
                             Submit
+                        </button>
+                        <button class="btn btn-secondary" type="reset">
+                            Reset the Form
                         </button>
                     </div>
                 </div>

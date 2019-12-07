@@ -5,8 +5,23 @@
     ViewBag.Title = "Profile Page";
 }
 
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Footy Fans</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+            <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+            <li><a asp-controller="Home" asp-action="CreateProfile">Create a Profile</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="text-center">
-    <h1>User Profiles</h1>
+    <h1 style="color:green">User Profiles</h1>
     <div id="wrapper">
         <div class="text-left" id="name"><h3><b>Name:</b> @Model.Name</h3></div>
         <div class="text-left" id="favoriteTeam"><h3><b>Favorite Team:</b> @Model.FavoriteTeam</h3></div>
