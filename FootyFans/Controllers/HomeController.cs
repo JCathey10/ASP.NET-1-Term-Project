@@ -39,11 +39,6 @@ namespace FootyFans.Controllers
 			return View();
 		}
 
-		public IActionResult AddComment(string description)
-		{
-			return View("AddComment", HttpUtility.HtmlDecode(description));
-		}
-
 		public IActionResult CreateProfile()
 		{
 			return View();
@@ -65,6 +60,11 @@ namespace FootyFans.Controllers
 		{
 			User user = repo.GetUserByName(name);
 			return View(user);
+		}
+
+		public IActionResult AddComment(string description)
+		{
+			return View("AddComment", HttpUtility.HtmlDecode(description));
 		}
 
 		[HttpPost]
