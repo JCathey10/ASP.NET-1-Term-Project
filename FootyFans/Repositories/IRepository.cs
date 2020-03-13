@@ -7,9 +7,9 @@ namespace FootyFans.Repositories
 	{
 		List<Video> Videos { get; }
 		Video GetVideoByDescription(string description);
-		User GetUserByName(string name);
-		List<User> Users { get; }
-		void AddUserProfile(User userProfile);
+		AppUser GetUserByName(string name);
+		List<AppUser> Users { get; }
+		void AddUserProfile(AppUser userProfile);
 		// Might need to add more...
 	}
 }

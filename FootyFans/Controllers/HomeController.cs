@@ -5,22 +5,25 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FootyFans.Models;
 using FootyFans.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace FootyFans.Controllers
 {
 	public class HomeController : Controller
 	{
 		IRepository repo;
-		public HomeController(IRepository r)
+		private UserManager<AppUser> userManager;
+
+		public HomeController(IRepository r, UserManager<AppUser> userMgr)
 		{
 			repo = r;
+			userManager = userMgr;
 		}
 
-		public IActionResult Index()
-		{
-			List<User> users = repo.Users;
-			return View(users);
-		}
+		public IActionResult Index() => View();
+
+		public IActionResult Home() => View(userManager.Users);
+		
 
 		public IActionResult About()
 		{
@@ -39,28 +42,28 @@ namespace FootyFans.Controllers
 			return View();
 		}
 
-		public IActionResult CreateProfile()
-		{
-			return View();
-		}
+		//public IActionResult CreateProfile()
+		//{
+		//	return View();
+		//}
 
-		[HttpPost]
-		public IActionResult CreateProfile(User userProfile)
-		{
-			// Get the list of current profiles from the repo
-			List<User> profiles = repo.Users;
+		//[HttpPost]
+		//public IActionResult CreateProfile(AppUser userProfile)
+		//{
+		//	// Get the list of current profiles from the repo
+		//	List<AppUser> profiles = repo.Users;
 
-			// Add the new profile to the list
-			profiles.Add(userProfile);
+		//	// Add the new profile to the list
+		//	profiles.Add(userProfile);
 
-			return View("Index", profiles);
-		}
+		//	return View("Index", profiles);
+		//}
 
-		public IActionResult ProfilePage(string name)
-		{
-			User user = repo.GetUserByName(name);
-			return View(user);
-		}
+		//public IActionResult ProfilePage(string name)
+		//{
+		//	User user = repo.GetUserByName(name);
+		//	return View(user);
+		//}
 
 		public IActionResult AddComment(string description)
 		{
@@ -68,12 +71,13 @@ namespace FootyFans.Controllers
 		}
 
 		[HttpPost]
-		public RedirectToActionResult AddComment(string description, string commentText, string user)
+		public RedirectToActionResult AddComment(string description, string commentText, string name)
 		{
 			Video video = repo.GetVideoByDescription(description);
+
 			video.Comments.Add(new Comment()
 			{
-				UserName = new User() { Name = user },
+				Name = name,
 				CommentText = commentText
 			});
 			return RedirectToAction("Footage");

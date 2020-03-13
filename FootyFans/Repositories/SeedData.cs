@@ -18,7 +18,9 @@ namespace FootyFans.Repositories
 					VideoUrl = "~/videos/Skills2019.mp4",
 					Description = "Amazing skill moves from 2019"
 				};
-				Comment skillsComment = new Comment() {
+				Comment skillsComment = new Comment()
+				{
+					Name = "Josh",
 					CommentText = "Love these skills!"
 				};
 				skills2019.Comments.Add(skillsComment);
@@ -29,7 +31,11 @@ namespace FootyFans.Repositories
 					VideoUrl = "~/videos/Ronaldinho.mp4",
 					Description = "Ronaldinho's legendary skills"
 				};
-				Comment ronaldinhoComment = new Comment() { CommentText = "I wish Ronaldinho was still playing." };
+				Comment ronaldinhoComment = new Comment() 
+				{ 
+					Name = "Josh", 
+					CommentText = "I wish Ronaldinho was still playing." 
+				};
 				ronaldinhoSkills.Comments.Add(ronaldinhoComment);
 				context.Videos.Add(ronaldinhoSkills);
 
@@ -38,7 +44,11 @@ namespace FootyFans.Repositories
 					VideoUrl = "~/videos/MessiSkills.mp4",
 					Description = "Leo Messi's career highlights"
 				};
-				Comment messiComment = new Comment() { CommentText = "He's the greatest player every!" };
+				Comment messiComment = new Comment() 
+				{ 
+					Name = "Josh", 
+					CommentText = "He's the greatest player every!" 
+				};
 				messiSkills.Comments.Add(messiComment);
 				context.Videos.Add(messiSkills);
 
@@ -47,7 +57,11 @@ namespace FootyFans.Repositories
 					VideoUrl = "~/videos/RonaldoSkills.mp4",
 					Description = "Cristiano Ronaldo career highlights"
 				};
-				Comment ronaldoComment = new Comment() { CommentText = "Ronaldo has always been one of the greatest players ever." };
+				Comment ronaldoComment = new Comment() 
+				{ 
+					Name = "Josh",
+					CommentText = "Ronaldo has always been one of the greatest players ever." 
+				};
 				ronaldoSkills.Comments.Add(ronaldoComment);
 				context.Videos.Add(ronaldoSkills);
 

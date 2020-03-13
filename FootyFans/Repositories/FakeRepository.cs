@@ -11,13 +11,13 @@ namespace FootyFans.Repositories
 		private static List<Video> videos = new List<Video>();
 		public List<Video> Videos { get { return videos; } }
 
-		private static List<User> users = new List<User>();
-		public List<User> Users { get { return users; } }
+		private static List<AppUser> users = new List<AppUser>();
+		public List<AppUser> Users { get { return users; } }
 
 		static FakeRepository()
 		{
 			AddTestData();
-			AddTestUserProfiles();
+			//AddTestUserProfiles();
 		}
 
 		public Video GetVideoByDescription(string description)
@@ -25,13 +25,13 @@ namespace FootyFans.Repositories
 			Video video = videos.Find(v => v.Description == description);
 			return video;
 		}
-		public User GetUserByName(string name)
+		public AppUser GetUserByName(string name)
 		{
-			User user = users.Find(u => u.Name == name);
+			AppUser user = users.Find(u => u.UserName == name);
 			return user;
 		}
 
-		public void AddUserProfile(User userProfile)
+		public void AddUserProfile(AppUser userProfile)
 		{
 			users.Add(userProfile);
 		}
@@ -78,24 +78,24 @@ namespace FootyFans.Repositories
 			videos.Add(ronaldoSkills);
 		}
 
-		static void AddTestUserProfiles()
-		{
-			User user1 = new User()
-			{
-				Name = "Josh Cathey",
-				FavoriteTeam = "Portand Timbers and FC Barcelona",
-				About = "Hello! I love this sport (except for all the ridiculous flopping)! " +
-						"I've been playing soccer since I was 6 and I'm hoping to play for the rest of my life!"
-			};
-			users.Add(user1);
+		//static void AddTestUserProfiles()
+		//{
+		//	AppUser user1 = new AppUser()
+		//	{
+		//		Name = "Josh Cathey",
+		//		FavoriteTeam = "Portand Timbers and FC Barcelona",
+		//		About = "Hello! I love this sport (except for all the ridiculous flopping)! " +
+		//				"I've been playing soccer since I was 6 and I'm hoping to play for the rest of my life!"
+		//	};
+		//	users.Add(user1);
 
-			User user2 = new User()
-			{
-				Name = "John Doe",
-				FavoriteTeam = "Portand Timbers",
-				About = "I've never played soccer, but I love watching the Timbers!"
-			};
-			users.Add(user2);
-		}
+		//	AppUser user2 = new AppUser()
+		//	{
+		//		Name = "John Doe",
+		//		FavoriteTeam = "Portand Timbers",
+		//		About = "I've never played soccer, but I love watching the Timbers!"
+		//	};
+		//	users.Add(user2);
+		//}
 	}
 }

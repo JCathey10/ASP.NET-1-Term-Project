@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+@{
+    // Using ViewData to send the Title back to _Layout
+    ViewBag.Title = "Login";
+    Layout = "_Layout";
+}
+
+<div id="wrapper">
+    <h4>Log In</h4>
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <form asp-action="Login" method="post">
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+
+        <button type="submit">Log In</button>
+    </form>
+</div>
+<div class="btnNav">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Home</a>
+</div>
