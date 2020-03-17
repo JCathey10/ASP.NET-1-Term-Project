@@ -14,6 +14,7 @@ namespace FootyFans.Repositories
 		public AppDbContext(DbContextOptions<AppDbContext> options)
 			: base(options) { }
 
+        public DbSet<ForumPost> ForumPosts { get; set; }
 		public DbSet<Video> Videos { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 

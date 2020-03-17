@@ -12,17 +12,15 @@ namespace FootyFans.Controllers
 	public class HomeController : Controller
 	{
 		IRepository repo;
-		private UserManager<AppUser> userManager;
 
-		public HomeController(IRepository r, UserManager<AppUser> userMgr)
+		public HomeController(IRepository r)
 		{
 			repo = r;
-			userManager = userMgr;
 		}
 
 		public IActionResult Index() => View();
 
-		public IActionResult Home() => View(userManager.Users);
+		public IActionResult Home() => View();
 		
 
 		public IActionResult About()
@@ -74,14 +72,33 @@ namespace FootyFans.Controllers
 		public RedirectToActionResult AddComment(string description, string commentText, string name)
 		{
 			Video video = repo.GetVideoByDescription(description);
-
-			video.Comments.Add(new Comment()
+			Comment comment = (new Comment()
 			{
 				Name = name,
 				CommentText = commentText
 			});
+			repo.AddComment(video, comment);
+
 			return RedirectToAction("Footage");
 		}
+
+		public IActionResult Forum()
+		{
+			List<ForumPost> forumPosts = repo.ForumPosts;
+			return View(forumPosts);
+		}
+
+		[HttpPost]
+		public RedirectToActionResult ForumPost(ForumPost newPost)
+		{
+			if (ModelState.IsValid)
+			{
+				repo.AddForumPost(newPost);
+			}
+			return RedirectToAction("Forum");
+		}
+
+
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

@@ -3,99 +3,105 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootyFans.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootyFans.Repositories
 {
 	public class Repository : IRepository
 	{
-		private static List<Video> videos = new List<Video>();
-		public List<Video> Videos { get { return videos; } }
+		private AppDbContext context;
+		//private static List<Video> videos = new List<Video>();
+		public List<Video> Videos { get { return context.Videos.Include("Comments").ToList(); } }
+		public List<ForumPost> ForumPosts { get { return context.ForumPosts.ToList(); } }
 
-		private static List<AppUser> users = new List<AppUser>();
-		public List<AppUser> Users { get { return users; } }
-
-		static Repository()
+		public Repository(AppDbContext appDbContext)
 		{
-			AddTestData();
-			AddTestUserProfiles();
+			context = appDbContext;
 		}
 
 		public Video GetVideoByDescription(string description)
 		{
-			Video video = videos.Find(v => v.Description == description);
+			Video video = context.Videos.FirstOrDefault(v => v.Description == description);
 			return video;
 		}
-		public AppUser GetUserByName(string name)
+
+		public void AddComment(Video video, Comment comment)
 		{
-			AppUser user = users.Find(u => u.UserName == name);
-			return user;
+			if (comment != null & video != null)
+			{
+				video.Comments.Add(comment);
+				context.Videos.Update(video);
+				context.SaveChanges();
+			}
 		}
 
-		public void AddUserProfile(AppUser userProfile)
+		public void AddForumPost(ForumPost newPost)
 		{
-			users.Add(userProfile);
+			if (newPost != null)
+			{
+				context.ForumPosts.Add(newPost);
+				context.SaveChanges();
+			}
 		}
 
-		static void AddTestData()
+		public ForumPost GetForumPostBySubject(string subject)
 		{
-			Video skills2019 = new Video()
-			{
-				VideoUrl = "../videos/Skills2019.mp4",
-				Description = "Amazing skill moves from 2019"
-			};
-			Comment skillsComment = new Comment()
-			{
-				CommentText = "Love these skills!"
-			};
-			skills2019.Comments.Add(skillsComment);
-			videos.Add(skills2019);
-
-			Video ronaldinhoSkills = new Video()
-			{
-				VideoUrl = "../videos/RonaldinhoSkills.mp4",
-				Description = "Ronaldinho's legendary skills"
-			};
-			Comment ronaldinhoComment = new Comment() { CommentText = "I wish Ronaldinho was still playing." };
-			ronaldinhoSkills.Comments.Add(ronaldinhoComment);
-			videos.Add(ronaldinhoSkills);
-
-			Video messiSkills = new Video()
-			{
-				VideoUrl = "../videos/MessiSkills.mp4",
-				Description = "Leo Messi's career highlights"
-			};
-			Comment messiComment = new Comment() { CommentText = "He's the greatest player every!" };
-			messiSkills.Comments.Add(messiComment);
-			videos.Add(messiSkills);
-
-			Video ronaldoSkills = new Video()
-			{
-				VideoUrl = "../videos/RonaldoSkills.mp4",
-				Description = "Cristiano Ronaldo Manchester United highlights"
-			};
-			Comment ronaldoComment = new Comment() { CommentText = "Ronaldo has always been one of the greatest players ever." };
-			ronaldoSkills.Comments.Add(ronaldoComment);
-			videos.Add(ronaldoSkills);
+			ForumPost post = context.ForumPosts.FirstOrDefault(f => f.Subject == subject);
+			return post;
 		}
 
-		static void AddTestUserProfiles()
-		{
-			AppUser user1 = new AppUser()
-			{
-				//Name = "Josh Cathey",
-				//FavoriteTeam = "Portand Timbers and FC Barcelona",
-				//About = "Hello! I love this sport (except for all the ridiculous flopping)! " +
-				//		"I've been playing soccer since I was 6 and I'm hoping to play for the rest of my life!"
-			};
-			users.Add(user1);
 
-			AppUser user2 = new AppUser()
-			{
-				//Name = "John Doe",
-				//FavoriteTeam = "Portand Timbers",
-				//About = "I've never played soccer, but I love watching the Timbers!"
-			};
-			users.Add(user2);
-		}
+		//public AppUser GetUserByName(string name)
+		//{
+		//	AppUser user = users.Find(u => u.UserName == name);
+		//	return user;
+		//}
+
+		//public void AddUserProfile(AppUser userProfile)
+		//{
+		//	users.Add(userProfile);
+		//}
+
+		//static void AddTestData()
+		//{
+		//	Video skills2019 = new Video()
+		//	{
+		//		VideoUrl = "../videos/Skills2019.mp4",
+		//		Description = "Amazing skill moves from 2019"
+		//	};
+		//	Comment skillsComment = new Comment()
+		//	{
+		//		CommentText = "Love these skills!"
+		//	};
+		//	skills2019.Comments.Add(skillsComment);
+		//	videos.Add(skills2019);
+
+		//	Video ronaldinhoSkills = new Video()
+		//	{
+		//		VideoUrl = "../videos/RonaldinhoSkills.mp4",
+		//		Description = "Ronaldinho's legendary skills"
+		//	};
+		//	Comment ronaldinhoComment = new Comment() { CommentText = "I wish Ronaldinho was still playing." };
+		//	ronaldinhoSkills.Comments.Add(ronaldinhoComment);
+		//	videos.Add(ronaldinhoSkills);
+
+		//	Video messiSkills = new Video()
+		//	{
+		//		VideoUrl = "../videos/MessiSkills.mp4",
+		//		Description = "Leo Messi's career highlights"
+		//	};
+		//	Comment messiComment = new Comment() { CommentText = "He's the greatest player every!" };
+		//	messiSkills.Comments.Add(messiComment);
+		//	videos.Add(messiSkills);
+
+		//	Video ronaldoSkills = new Video()
+		//	{
+		//		VideoUrl = "../videos/RonaldoSkills.mp4",
+		//		Description = "Cristiano Ronaldo Manchester United highlights"
+		//	};
+		//	Comment ronaldoComment = new Comment() { CommentText = "Ronaldo has always been one of the greatest players ever." };
+		//	ronaldoSkills.Comments.Add(ronaldoComment);
+		//	videos.Add(ronaldoSkills);
+		//}
 	}
 }

@@ -1,0 +1,27 @@
+﻿@model List<ForumPost>
+@{
+    Layout = "_Layout";
+    // Sending the Title back to the Layout
+    ViewBag.Title = "Forum";
+}
+
+<div class="text-center">
+    <h1>Community Forum</h1><br />
+
+    @foreach (ForumPost p in Model)
+    {
+        <br />
+        <label><b>Subject: </b>@p.Subject</label><br />
+        <label><b>Message: </b>@p.Message</label><br />
+        @if (p.Comments.Count > 0)
+        {
+            @foreach (Comment c in p.Comments)
+            {
+
+                <label><b>@c.Name says:</b> @c.CommentText</label><br />
+            }
+        }
+        <a asp-action="AddComment" asp-route-subject="@p.Subject"><b>Add a comment</b></a>
+        <br />
+    }
+</div>

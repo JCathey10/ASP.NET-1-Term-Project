@@ -6,10 +6,17 @@ namespace FootyFans.Repositories
 	public interface IRepository
 	{
 		List<Video> Videos { get; }
+		List<ForumPost> ForumPosts { get; }
 		Video GetVideoByDescription(string description);
-		AppUser GetUserByName(string name);
-		List<AppUser> Users { get; }
-		void AddUserProfile(AppUser userProfile);
+
+		void AddComment(Video video, Comment comment);
+		void AddForumPost(ForumPost newPost);
+		ForumPost GetForumPostBySubject(string subject);
+
+
+		//AppUser GetUserByName(string name);
+		//List<AppUser> Users { get; }
+		//void AddUserProfile(AppUser userProfile);
 		// Might need to add more...
 	}
 }

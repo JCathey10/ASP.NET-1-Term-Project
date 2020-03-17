@@ -9,10 +9,12 @@ namespace FootyFans.Repositories
 	public class FakeRepository : IRepository
 	{
 		private static List<Video> videos = new List<Video>();
+		private static List<ForumPost> forumPosts = new List<ForumPost>();
 		public List<Video> Videos { get { return videos; } }
+		public List<ForumPost> ForumPosts { get { return forumPosts; } }
 
-		private static List<AppUser> users = new List<AppUser>();
-		public List<AppUser> Users { get { return users; } }
+		//private static List<AppUser> users = new List<AppUser>();
+		//public List<AppUser> Users { get { return users; } }
 
 		static FakeRepository()
 		{
@@ -25,16 +27,40 @@ namespace FootyFans.Repositories
 			Video video = videos.Find(v => v.Description == description);
 			return video;
 		}
-		public AppUser GetUserByName(string name)
+
+		public void AddComment(Video video, Comment comment)
 		{
-			AppUser user = users.Find(u => u.UserName == name);
-			return user;
+			if (video != null & comment != null)
+			{
+				//Video theVideo = videos.First<Video>(v => v.VideoID == video.VideoID);
+				video.Comments.Add(comment);
+			}
 		}
 
-		public void AddUserProfile(AppUser userProfile)
+		public void AddForumPost(ForumPost newPost)
 		{
-			users.Add(userProfile);
+			if (newPost != null)
+			{
+				ForumPosts.Add(newPost);
+			}
 		}
+
+		public ForumPost GetForumPostBySubject(string subject)
+		{
+			ForumPost post = ForumPosts.Find(p => p.Subject == subject);
+			return post;
+		}
+
+		//public AppUser GetUserByName(string name)
+		//{
+		//	AppUser user = users.Find(u => u.UserName == name);
+		//	return user;
+		//}
+
+		//public void AddUserProfile(AppUser userProfile)
+		//{
+		//	users.Add(userProfile);
+		//}
 
 		static void AddTestData()
 		{

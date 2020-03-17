@@ -65,6 +65,24 @@ namespace FootyFans.Repositories
 				ronaldoSkills.Comments.Add(ronaldoComment);
 				context.Videos.Add(ronaldoSkills);
 
+
+				// Forums 
+				ForumPost post1 = new ForumPost()
+				{
+					Subject = "Break In Action",
+					Message = "I can't wait until the Coronavirus outbreak is over so " +
+								"so we can go back to watching sports!",
+				};
+				Comment post1Comment = new Comment()
+				{
+					Name = "Leo Messi",
+					CommentText = "All will be normal soon enough, take care of your family."
+				};
+				post1.Comments.Add(post1Comment);
+				context.ForumPosts.Add(post1);
+
+
+
 				// Save all the data
 				context.SaveChanges();
 
