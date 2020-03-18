@@ -32,24 +32,24 @@ namespace FootyFans.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ProfilePage(string id)
-        {
-            AppUser user = await userManager.FindByIdAsync(id);
-            ViewBag.userid = userManager.GetUserId(HttpContext.User);
-            if (user != null)
-            {
-                return View(user);
-            }
-            else
-            {
-                return RedirectToAction("AccessDenied");
-            }
-        }
+        //public async Task<IActionResult> ProfilePage(string id)
+        //{
+        //    AppUser user = await userManager.FindByIdAsync(id);
+        //    ViewBag.userid = userManager.GetUserId(HttpContext.User);
+        //    if (user != null)
+        //    {
+        //        return View(user);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("AccessDenied");
+        //    }
+        //}
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -60,8 +60,8 @@ namespace FootyFans.Controllers
                     var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
-                        //return Redirect(returnUrl ?? "/");
-                        return RedirectToAction("Home", "Home");
+                        return Redirect(returnUrl ?? "/");
+                        //return RedirectToAction("Home", "Home");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email), "Invalid user or password");

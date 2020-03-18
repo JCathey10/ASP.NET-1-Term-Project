@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FootyFans.Migrations
 {
-    public partial class Primary : Migration
+    public partial class Updated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,20 @@ namespace FootyFans.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ForumPosts",
+                columns: table => new
+                {
+                    ForumPostID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Subject = table.Column<string>(nullable: false),
+                    Message = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ForumPosts", x => x.ForumPostID);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,11 +188,18 @@ namespace FootyFans.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     CommentText = table.Column<string>(nullable: false),
+                    ForumPostID = table.Column<int>(nullable: true),
                     VideoID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_ForumPosts_ForumPostID",
+                        column: x => x.ForumPostID,
+                        principalTable: "ForumPosts",
+                        principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Videos_VideoID",
                         column: x => x.VideoID,
@@ -227,6 +248,11 @@ namespace FootyFans.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_ForumPostID",
+                table: "Comments",
+                column: "ForumPostID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_VideoID",
                 table: "Comments",
                 column: "VideoID");
@@ -257,6 +283,9 @@ namespace FootyFans.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ForumPosts");
 
             migrationBuilder.DropTable(
                 name: "Videos");

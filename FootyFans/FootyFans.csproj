@@ -5,6 +5,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\videos\MessiSkills.mp4" />
+    <Content Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\videos\RonaldinhoSkills.mp4" />
+    <Content Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\videos\RonaldoSkills.mp4" />
+    <Content Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\videos\Skills2019.mp4" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
@@ -22,6 +29,14 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\wwwroot\videos\MessiSkills.mp4" />
+    <None Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\wwwroot\videos\RonaldinhoSkills.mp4" />
+    <None Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\wwwroot\videos\RonaldoSkills.mp4" />
+    <None Include="..\..\..\..\Web Development 2 ASP.NET %2528CS 296N%2529\Term Project\FootyFans_Version_2\FootyFans\wwwroot\videos\Skills2019.mp4" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,56 @@
-﻿@model IEnumerable<AppUser> 
+﻿@model List<ForumPost>
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
 @{
     // Using ViewData to send the Title back to _Layout
     ViewBag.Title = "Home Page";
     Layout = "_Layout";
 }
-    
+    <header>
+        <div id="logo">Footy&nbsp;Fans</div>
+    </header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Home">Footy Fans</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Home" asp-action="Home">Home</a></li>
+                <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+                <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-controller="Admin" asp-action="Index">Users</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Forum Posts<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach (ForumPost post in Model)
+                        {
+                            <li><a asp-action="Forum" asp-route-subject="@post.Subject">@post.Subject</a></li>
+
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @{
+                    var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                }
+                @if (result.Success)
+                {
+                    await Html.RenderPartialAsync("_LoginPartial");
+                }
+                else
+                {
+                    throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                        "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                        $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+                }
+            </ul>
+        </div>
+    </nav>
+
 <div class="text-center">
     <h1 style="color:green">Welcome, Fellow Soccer Fans!</h1><br />
     <h3>Tour our site and let us know what you think!</h3>

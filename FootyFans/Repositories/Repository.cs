@@ -11,17 +11,20 @@ namespace FootyFans.Repositories
 	{
 		private AppDbContext context;
 		//private static List<Video> videos = new List<Video>();
+		//public List<Video> Videos { get { return videos; } }
 		public List<Video> Videos { get { return context.Videos.Include("Comments").ToList(); } }
 		public List<ForumPost> ForumPosts { get { return context.ForumPosts.ToList(); } }
 
 		public Repository(AppDbContext appDbContext)
 		{
 			context = appDbContext;
+			//AddTestData();
 		}
 
 		public Video GetVideoByDescription(string description)
 		{
-			Video video = context.Videos.FirstOrDefault(v => v.Description == description);
+			Video video = context.Videos.First(v => v.Description == description);
+			//Video video = videos.Find(v => v.Description == description);
 			return video;
 		}
 
@@ -50,18 +53,6 @@ namespace FootyFans.Repositories
 			return post;
 		}
 
-
-		//public AppUser GetUserByName(string name)
-		//{
-		//	AppUser user = users.Find(u => u.UserName == name);
-		//	return user;
-		//}
-
-		//public void AddUserProfile(AppUser userProfile)
-		//{
-		//	users.Add(userProfile);
-		//}
-
 		//static void AddTestData()
 		//{
 		//	Video skills2019 = new Video()
@@ -71,6 +62,7 @@ namespace FootyFans.Repositories
 		//	};
 		//	Comment skillsComment = new Comment()
 		//	{
+		//		Name = "Josh",
 		//		CommentText = "Love these skills!"
 		//	};
 		//	skills2019.Comments.Add(skillsComment);
@@ -81,7 +73,11 @@ namespace FootyFans.Repositories
 		//		VideoUrl = "../videos/RonaldinhoSkills.mp4",
 		//		Description = "Ronaldinho's legendary skills"
 		//	};
-		//	Comment ronaldinhoComment = new Comment() { CommentText = "I wish Ronaldinho was still playing." };
+		//	Comment ronaldinhoComment = new Comment()
+		//	{
+		//		Name = "Josh",
+		//		CommentText = "I wish Ronaldinho was still playing."
+		//	};
 		//	ronaldinhoSkills.Comments.Add(ronaldinhoComment);
 		//	videos.Add(ronaldinhoSkills);
 
@@ -90,7 +86,11 @@ namespace FootyFans.Repositories
 		//		VideoUrl = "../videos/MessiSkills.mp4",
 		//		Description = "Leo Messi's career highlights"
 		//	};
-		//	Comment messiComment = new Comment() { CommentText = "He's the greatest player every!" };
+		//	Comment messiComment = new Comment()
+		//	{
+		//		Name = "Josh",
+		//		CommentText = "He's the greatest player every!"
+		//	};
 		//	messiSkills.Comments.Add(messiComment);
 		//	videos.Add(messiSkills);
 
@@ -99,7 +99,11 @@ namespace FootyFans.Repositories
 		//		VideoUrl = "../videos/RonaldoSkills.mp4",
 		//		Description = "Cristiano Ronaldo Manchester United highlights"
 		//	};
-		//	Comment ronaldoComment = new Comment() { CommentText = "Ronaldo has always been one of the greatest players ever." };
+		//	Comment ronaldoComment = new Comment()
+		//	{
+		//		Name = "Josh",
+		//		CommentText = "Ronaldo has always been one of the greatest players ever."
+		//	};
 		//	ronaldoSkills.Comments.Add(ronaldoComment);
 		//	videos.Add(ronaldoSkills);
 		//}

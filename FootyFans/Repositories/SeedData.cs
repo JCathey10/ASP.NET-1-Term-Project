@@ -15,8 +15,8 @@ namespace FootyFans.Repositories
 			{
 				Video skills2019 = new Video()
 				{
-					VideoUrl = "~/videos/Skills2019.mp4",
-					Description = "Amazing skill moves from 2019"
+					VideoUrl = "../videos/Skills2019.mp4",
+					Description = "Amazing skill moves from 2019",
 				};
 				Comment skillsComment = new Comment()
 				{
@@ -28,8 +28,8 @@ namespace FootyFans.Repositories
 
 				Video ronaldinhoSkills = new Video()
 				{
-					VideoUrl = "~/videos/Ronaldinho.mp4",
-					Description = "Ronaldinho's legendary skills"
+					VideoUrl = "../videos/RonaldinhoSkills.mp4",
+					Description = "Ronaldinho's legendary skills",
 				};
 				Comment ronaldinhoComment = new Comment() 
 				{ 
@@ -41,7 +41,7 @@ namespace FootyFans.Repositories
 
 				Video messiSkills = new Video()
 				{
-					VideoUrl = "~/videos/MessiSkills.mp4",
+					VideoUrl = "../videos/MessiSkills.mp4",
 					Description = "Leo Messi's career highlights"
 				};
 				Comment messiComment = new Comment() 
@@ -54,7 +54,7 @@ namespace FootyFans.Repositories
 
 				Video ronaldoSkills = new Video()
 				{
-					VideoUrl = "~/videos/RonaldoSkills.mp4",
+					VideoUrl = "../videos/RonaldoSkills.mp4",
 					Description = "Cristiano Ronaldo career highlights"
 				};
 				Comment ronaldoComment = new Comment() 
@@ -70,17 +70,10 @@ namespace FootyFans.Repositories
 				ForumPost post1 = new ForumPost()
 				{
 					Subject = "Break In Action",
-					Message = "I can't wait until the Coronavirus outbreak is over so " +
+					Message = "I can't wait until the Coronavirus outbreak is over " +
 								"so we can go back to watching sports!",
 				};
-				Comment post1Comment = new Comment()
-				{
-					Name = "Leo Messi",
-					CommentText = "All will be normal soon enough, take care of your family."
-				};
-				post1.Comments.Add(post1Comment);
 				context.ForumPosts.Add(post1);
-
 
 
 				// Save all the data

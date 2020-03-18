@@ -46,4 +46,12 @@ label {
     background-color:#ffffff /* white */
 }
 
+#wrapper-forum {
+    border: 1px solid green;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff /* white */
+}
+
 

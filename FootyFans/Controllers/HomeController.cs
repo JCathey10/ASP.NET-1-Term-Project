@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using FootyFans.Models;
 using FootyFans.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FootyFans.Controllers
 {
@@ -18,14 +19,24 @@ namespace FootyFans.Controllers
 			repo = r;
 		}
 
-		public IActionResult Index() => View();
+		public IActionResult Index()
+		{
+			List<ForumPost> posts = repo.ForumPosts;
+			return View(posts);
+		}
+			
 
-		public IActionResult Home() => View();
-		
+		public IActionResult Home()
+		{
+			List<ForumPost> posts = repo.ForumPosts;
+			return View(posts);
+		}
+
 
 		public IActionResult About()
 		{
-			return View();
+			List<ForumPost> posts = repo.ForumPosts;
+			return View(posts);
 		}
 
 		public IActionResult Footage()
@@ -37,37 +48,17 @@ namespace FootyFans.Controllers
 
 		public IActionResult News()
 		{
-			return View();
+			List<ForumPost> posts = repo.ForumPosts;
+			return View(posts);
 		}
-
-		//public IActionResult CreateProfile()
-		//{
-		//	return View();
-		//}
-
-		//[HttpPost]
-		//public IActionResult CreateProfile(AppUser userProfile)
-		//{
-		//	// Get the list of current profiles from the repo
-		//	List<AppUser> profiles = repo.Users;
-
-		//	// Add the new profile to the list
-		//	profiles.Add(userProfile);
-
-		//	return View("Index", profiles);
-		//}
-
-		//public IActionResult ProfilePage(string name)
-		//{
-		//	User user = repo.GetUserByName(name);
-		//	return View(user);
-		//}
 
 		public IActionResult AddComment(string description)
 		{
 			return View("AddComment", HttpUtility.HtmlDecode(description));
 		}
 
+
+		[Authorize]
 		[HttpPost]
 		public RedirectToActionResult AddComment(string description, string commentText, string name)
 		{
@@ -82,10 +73,16 @@ namespace FootyFans.Controllers
 			return RedirectToAction("Footage");
 		}
 
-		public IActionResult Forum()
+		public IActionResult Forum(string subject)
 		{
-			List<ForumPost> forumPosts = repo.ForumPosts;
-			return View(forumPosts);
+			ForumPost post = repo.GetForumPostBySubject(subject);
+			return View(post);
+		}
+
+
+		public IActionResult ForumPost()
+		{
+			return View();
 		}
 
 		[HttpPost]
@@ -95,7 +92,7 @@ namespace FootyFans.Controllers
 			{
 				repo.AddForumPost(newPost);
 			}
-			return RedirectToAction("Forum");
+			return RedirectToAction("Home");
 		}
 
 

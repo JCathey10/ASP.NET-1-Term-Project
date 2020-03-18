@@ -95,6 +95,9 @@ namespace FootyFans.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ForumPostID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -104,9 +107,31 @@ namespace FootyFans.Migrations
 
                     b.HasKey("CommentId");
 
+                    b.HasIndex("ForumPostID");
+
                     b.HasIndex("VideoID");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("FootyFans.Models.ForumPost", b =>
+                {
+                    b.Property<int>("ForumPostID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ForumPostID");
+
+                    b.ToTable("ForumPosts");
                 });
 
             modelBuilder.Entity("FootyFans.Models.Video", b =>
@@ -260,6 +285,10 @@ namespace FootyFans.Migrations
 
             modelBuilder.Entity("FootyFans.Models.Comment", b =>
                 {
+                    b.HasOne("FootyFans.Models.ForumPost", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("ForumPostID");
+
                     b.HasOne("FootyFans.Models.Video", null)
                         .WithMany("Comments")
                         .HasForeignKey("VideoID");
