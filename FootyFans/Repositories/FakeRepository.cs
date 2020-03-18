@@ -13,13 +13,9 @@ namespace FootyFans.Repositories
 		public List<Video> Videos { get { return videos; } }
 		public List<ForumPost> ForumPosts { get { return forumPosts; } }
 
-		//private static List<AppUser> users = new List<AppUser>();
-		//public List<AppUser> Users { get { return users; } }
-
 		static FakeRepository()
 		{
 			AddTestData();
-			//AddTestUserProfiles();
 		}
 
 		public Video GetVideoByDescription(string description)
@@ -32,7 +28,6 @@ namespace FootyFans.Repositories
 		{
 			if (video != null & comment != null)
 			{
-				//Video theVideo = videos.First<Video>(v => v.VideoID == video.VideoID);
 				video.Comments.Add(comment);
 			}
 		}
@@ -50,17 +45,6 @@ namespace FootyFans.Repositories
 			ForumPost post = ForumPosts.Find(p => p.Subject == subject);
 			return post;
 		}
-
-		//public AppUser GetUserByName(string name)
-		//{
-		//	AppUser user = users.Find(u => u.UserName == name);
-		//	return user;
-		//}
-
-		//public void AddUserProfile(AppUser userProfile)
-		//{
-		//	users.Add(userProfile);
-		//}
 
 		static void AddTestData()
 		{
@@ -103,25 +87,5 @@ namespace FootyFans.Repositories
 			ronaldoSkills.Comments.Add(ronaldoComment);
 			videos.Add(ronaldoSkills);
 		}
-
-		//static void AddTestUserProfiles()
-		//{
-		//	AppUser user1 = new AppUser()
-		//	{
-		//		Name = "Josh Cathey",
-		//		FavoriteTeam = "Portand Timbers and FC Barcelona",
-		//		About = "Hello! I love this sport (except for all the ridiculous flopping)! " +
-		//				"I've been playing soccer since I was 6 and I'm hoping to play for the rest of my life!"
-		//	};
-		//	users.Add(user1);
-
-		//	AppUser user2 = new AppUser()
-		//	{
-		//		Name = "John Doe",
-		//		FavoriteTeam = "Portand Timbers",
-		//		About = "I've never played soccer, but I love watching the Timbers!"
-		//	};
-		//	users.Add(user2);
-		//}
 	}
 }

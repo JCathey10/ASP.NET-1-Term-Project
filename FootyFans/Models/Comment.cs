@@ -8,7 +8,6 @@ namespace FootyFans.Models
 {
 	public class Comment
 	{
-		
 		public int CommentId { get; set; }
 
 		[Required]

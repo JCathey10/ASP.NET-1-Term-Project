@@ -10,21 +10,6 @@ namespace FootyFansTests
 	public class FootyFansTests
 	{
 		[Fact]
-		public void IndexTest()
-		{
-			// Arrange
-			var repo = new FakeRepository();
-			var homeController = new HomeController(repo);
-
-			// Act
-			homeController.Index();
-
-			// Assert
-			//Assert.Equal("Josh Cathey", repo.Users[0].UserName);
-			//Assert.Equal("John Doe", repo.Users[1].UserName);
-		}
-
-		[Fact]
 		public void FootageTest()
 		{
 			// Arrange
@@ -41,40 +26,6 @@ namespace FootyFansTests
 			Assert.Equal("Cristiano Ronaldo Manchester United highlights", repo.Videos[3].Description);
 		}
 
-		//[Fact]
-		//public void CreateProfileTest()
-		//{
-		//	// Arrange
-		//	var repo = new FakeRepository();
-		//	var homeController = new HomeController(repo);
-		//	AppUser testUser = new AppUser()
-		//	{
-		//		Name = "Test",
-		//		FavoriteTeam = "FC Testing",
-		//		About = "I love testing!"
-		//	};
-
-		//	// Act
-		//	homeController.CreateProfile(testUser);
-
-		//	// Assert
-		//	Assert.Equal(testUser, repo.Users[2]);
-		//}
-
-		//[Fact]
-		//public void ProfilePageTest()
-		//{
-		//	// Arrange
-		//	var repo = new FakeRepository();
-		//	var homeController = new HomeController(repo);
-
-		//	// Act
-		//	homeController.ProfilePage("Josh Cathey");
-
-		//	// Assert
-		//	Assert.Equal("Portand Timbers and FC Barcelona", repo.Users[0].FavoriteTeam);
-		//}
-
 		[Fact]
 		public void AddCommentTest()
 		{
@@ -88,6 +39,25 @@ namespace FootyFansTests
 
 			// Assert
 			Assert.Equal("Did this test work?", test.Comments[1].CommentText.ToString());
+		}
+
+		[Fact]
+		public void AddForumPostTest()
+		{
+			// Arrange
+			var repo = new FakeRepository();
+			var homeController = new HomeController(repo);
+			ForumPost postTest = new ForumPost()
+			{
+				Subject = "Testing",
+				Message = "This is a test"
+			};
+
+			//Act
+			homeController.ForumPost(postTest);
+
+			//Assert
+			Assert.Equal(repo.ForumPosts[0], postTest);
 		}
 
 	}

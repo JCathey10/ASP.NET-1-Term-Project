@@ -12,11 +12,5 @@ namespace FootyFans.Repositories
 		void AddComment(Video video, Comment comment);
 		void AddForumPost(ForumPost newPost);
 		ForumPost GetForumPostBySubject(string subject);
-
-
-		//AppUser GetUserByName(string name);
-		//List<AppUser> Users { get; }
-		//void AddUserProfile(AppUser userProfile);
-		// Might need to add more...
 	}
 }

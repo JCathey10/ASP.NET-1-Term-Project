@@ -75,7 +75,6 @@ namespace FootyFans.Repositories
 				};
 				context.ForumPosts.Add(post1);
 
-
 				// Save all the data
 				context.SaveChanges();
 
