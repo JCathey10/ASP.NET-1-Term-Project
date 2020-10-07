@@ -1,0 +1,68 @@
+﻿@model List<Video>
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+@{
+    // Using ViewData to send the Title back to _Layout
+    ViewBag.Title= "Footage";
+    Layout = "_Layout";
+}
+    <header>
+        <div id="logo">Soccer&nbsp;Fans</div>
+    </header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Home">Soccer Fans</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Home" asp-action="Home">Home</a></li>
+                <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+                <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+                <li><a asp-controller="Home" asp-action="About">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @{
+                    var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                }
+                @if (result.Success)
+                {
+                    await Html.RenderPartialAsync("_LoginPartial");
+                }
+                else
+                {
+                    throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                        "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                        $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="text-center">
+        <h1 style="color:green">Some of Our Favorite Videos</h1><br />
+
+        @foreach (Video v in Model)
+        {
+            <div id="wrapper">
+                <div class="text-center">
+                    <div id="video">
+                        <h3><b>@v.Description</b></h3>
+                        <video width="500" controls>
+                            <source src="@v.VideoUrl" type="video/mp4" />
+                        </video><br />
+                        @if (v.Comments.Count > 0)
+                        {
+                            @foreach (Comment c in v.Comments)
+                            {
+                                <label><b>@c.Name says: </b>@c.CommentText</label><br />
+                            }
+                        }
+                        <a asp-action="AddComment" asp-route-description="@v.Description"><b>Add a comment</b></a>
+                        <br />
+                    </div>
+                </div>
+            </div><br />
+        }
+    </div>

@@ -1,0 +1,62 @@
+﻿@model String
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+@{
+    Layout = "_Layout";
+    // Sending the Title back to the Layout
+    ViewBag.Title = "Comment";
+}
+    <header>
+        <div id="logo">Soccer&nbsp;Fans</div>
+    </header>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Home">Soccer Fans</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Home" asp-action="Home">Home</a></li>
+            <li><a asp-controller="Home" asp-action="News">Recent News</a></li>
+            <li><a asp-controller="Home" asp-action="Footage">Footage</a></li>
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @{
+                var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+            }
+            @if (result.Success)
+            {
+                await Html.RenderPartialAsync("_LoginPartial");
+            }
+            else
+            {
+                throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                    "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                    $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+            }
+        </ul>
+    </div>
+</nav>
+
+<div class="text-center">
+    <h1 style="color:green">Add a comment for <em> @Model</em></h1>
+</div>
+<div id="wrapper">
+    <div class="panel panel-success">
+        <div class="panel-body">
+            <form class="p-a-1" method="post">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input class="form-control" required name="name" placeholder="Enter your name here" /><br />
+                    <label for="commentText">Your Comment:</label>
+                    <input class="form-control" required name="commentText" placeholder="Write your comment here." /><br />
+                    <button class="btn btn-primary" type="submit" value="Enter">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
